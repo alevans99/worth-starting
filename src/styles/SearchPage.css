@@ -1,0 +1,23 @@
+.SearchPage{
+
+
+}
+
+.search-container{
+    margin: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.search-input{
+    font-size: 4rem;
+    padding: 10px;
+}
+
+.search-submit-button{
+    font-size: 3rem;
+    padding: 10px;
+
+}

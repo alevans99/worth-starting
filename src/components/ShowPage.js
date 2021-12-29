@@ -6,7 +6,7 @@ function ShowPage() {
 
   return (
     <div className="ShowPage">
-    
+        
     </div>
   );
 }
