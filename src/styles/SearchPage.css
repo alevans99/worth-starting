@@ -21,3 +21,9 @@
     padding: 10px;
 
 }
+
+.search-result-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

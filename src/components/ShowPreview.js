@@ -1,11 +1,11 @@
 import '../styles/ShowPreview.css';
 
 
-function ShowPreview({showImageSrc, showName}) {
+function ShowPreview({showId, showImageSrc, showName}) {
 
   return (
     <div className="ShowPreview">
-        <img src={showImageSrc}></img>
+        <img src={showImageSrc} alt={`${showName} Poster`}></img>
         <h3>{showName}</h3>
     </div>
   );
