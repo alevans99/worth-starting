@@ -1,6 +1,8 @@
 .show-container{
     width: 100%;
     margin: 100px;
+    display: flex;
+    flex-direction: column;
 }
 
 .show-info-container{
