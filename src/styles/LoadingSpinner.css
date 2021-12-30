@@ -1,6 +1,7 @@
 .ShowLoadingSpinner{
     display: flex;
     justify-content: center;
+    
 }
 
 .loading-spinner-image{

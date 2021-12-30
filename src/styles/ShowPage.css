@@ -1,0 +1,49 @@
+.show-container{
+    width: 100%;
+    margin: 100px;
+}
+
+.show-info-container{
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: repeat(4, min-content);
+    grid-template-areas: 
+    "image title"
+    "image synopsis" 
+    "image year" 
+    "image rating";
+ 
+}
+
+.show-image{
+    grid-area: image;
+    height: 500px;
+    width: auto;
+    margin-right: 100px;
+}
+
+.show-container h2{
+    font-size: 5rem;
+    margin: 0;
+}
+
+.show-container h3{
+    font-size: 2rem;
+
+}
+.show-title{
+    grid-area: title;
+
+}
+.show-synopsis{
+    grid-area: synopsis;
+
+}
+.show-year{
+    grid-area: year;
+
+}
+.show-rating{
+    grid-area: rating;
+
+}

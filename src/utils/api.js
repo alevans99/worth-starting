@@ -11,3 +11,11 @@ export const searchForShow = async (showName) => {
     const searchResult = await tvMazeApi.get("/search/shows", {params: queries})
     return searchResult
 }
+
+export const getShowAndEpisodes = (showId) => {
+
+    const showDetails = tvMazeApi.get(`/shows/${showId}`)
+   const episodes = tvMazeApi.get(`/shows/${showId}/episodes`)
+    return Promise.all([showDetails, episodes])
+}
+
