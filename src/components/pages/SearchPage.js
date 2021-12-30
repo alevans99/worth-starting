@@ -1,15 +1,18 @@
 import { useState } from "react";
-import "../styles/SearchPage.css";
-import { searchForShow } from "../utils/api";
-import ShowPreview from "./ShowPreview";
-import notFound from "../assets/not-found.jpeg"
+import "../../styles/SearchPage.css";
+import { searchForShow } from "../../utils/api";
+import ShowPreview from "../sub-components/ShowPreview";
+import notFound from "../../assets/not-found.jpeg"
+import LoadingSpinner from "../sub-components/LoadingSpinner";
 function SearchPage({showsDisplayed, setShowsDisplayed}) {
   const [searchQuery, setSearchQuery] = useState("");
   // const [showsDisplayed, setShowsDisplayed] = useState([])
   const [showsHidden, setShowsHidden] = useState([])
+  const [searchLoading, setSearchLoading] = useState(false)
 
 
   const submitSearch = () => {
+    setSearchLoading(true)
     searchForShow(searchQuery)
     .then((searchResult) => {
         if (searchResult.data.length > 20){
@@ -19,11 +22,14 @@ function SearchPage({showsDisplayed, setShowsDisplayed}) {
             setShowsDisplayed(searchResult.data.map((result) => {return result.show}))
         }
 
+        setSearchLoading(false)
 
 
     })
     .catch((err) => {
         console.log("Error With Search " + err)
+        setSearchLoading(false)
+
     })
   }
   
@@ -48,7 +54,7 @@ function SearchPage({showsDisplayed, setShowsDisplayed}) {
             submitSearch()
         }}>Search</button>
       </div>
-
+        <LoadingSpinner isLoading={searchLoading}>
         <div className="search-result-container">
         {showsDisplayed.map((show, index) => {
             console.log(show)
@@ -60,7 +66,7 @@ function SearchPage({showsDisplayed, setShowsDisplayed}) {
         })}
 
         </div>
-
+        </LoadingSpinner>
 
     </div>
     

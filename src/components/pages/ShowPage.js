@@ -1,4 +1,4 @@
-import '../styles/ShowPage.css';
+import '../../styles/ShowPage.css';
 
 
 

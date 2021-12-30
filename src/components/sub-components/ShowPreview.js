@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../styles/ShowPreview.css";
+import "../../styles/ShowPreview.css";
 
 function ShowPreview({ showId, showImageSrc, showName }) {
   //Adds the ID as a query to the link for each Show Preview card. This allows

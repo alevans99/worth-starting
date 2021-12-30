@@ -1,7 +1,7 @@
 import "./App.css";
 
-import SearchPage from "./components/SearchPage";
-import ShowPage from "./components/ShowPage";
+import SearchPage from "./components/pages/SearchPage";
+import ShowPage from "./components/pages/ShowPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
