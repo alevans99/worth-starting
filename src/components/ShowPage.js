@@ -2,8 +2,8 @@ import '../styles/ShowPage.css';
 
 
 
-function ShowPage() {
-
+function ShowPage(props) {
+console.log(props)
   return (
     <div className="ShowPage">
         

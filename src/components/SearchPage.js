@@ -3,9 +3,9 @@ import "../styles/SearchPage.css";
 import { searchForShow } from "../utils/api";
 import ShowPreview from "./ShowPreview";
 import notFound from "../assets/not-found.jpeg"
-function SearchPage() {
+function SearchPage({showsDisplayed, setShowsDisplayed}) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [showsDisplayed, setShowsDisplayed] = useState([])
+  // const [showsDisplayed, setShowsDisplayed] = useState([])
   const [showsHidden, setShowsHidden] = useState([])
 
 

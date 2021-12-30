@@ -1,20 +1,21 @@
-import './App.css';
+import "./App.css";
 
-import SearchPage from './components/SearchPage'
-import ShowPage from './components/ShowPage'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SearchPage from "./components/SearchPage";
+import ShowPage from "./components/ShowPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 function App() {
+  const [showsDisplayed, setShowsDisplayed] = useState([]);
 
   return (
-  <BrowserRouter>
-    <div className="App">
-    <Routes>
-      <Route path="/" element={<SearchPage/>}/>
-      <Route path="/show" element={<ShowPage/>}/>
-
-    </Routes>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<SearchPage showsDisplayed={showsDisplayed} setShowsDisplayed={setShowsDisplayed}/>} />
+          <Route path="/show" element={<ShowPage />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
