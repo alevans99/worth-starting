@@ -4,11 +4,14 @@ import LoadingSpinner from '../sub-components/LoadingSpinner';
 import { getShowAndEpisodes } from '../../utils/api';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import VerticalBarChart from '../sub-components/VerticalBarChart';
+import InfoModal from '../sub-components/InfoModal';
 
 
 function ShowPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [showLoading, setShowLoading] = useState(true)
+  const [showModal, setShowModal] = useState(false)
+  const [modalData, setModalData] = useState({})
   const location = useLocation()
   const [episodesInfo, setEpisodesInfo] = useState({})
   const showImage = location.state.showImageSrc
@@ -38,19 +41,31 @@ function ShowPage() {
       let episodeNumbers = []
       let episodeRatings = []
 
-      episodes.data.forEach((episode) => {
+      let modalData = episodes.data.map((episode) => {
         episodeNames.push(episode.name)
         episodeNumbers.push(`S${episode.season}:E${episode.number}`)
         episodeRatings.push(episode.rating.average)
+        const infoForModal = {
+          
+            title: `S${episode.season}:E${episode.number}: ${episode.name}`,
+            rating: episode.rating.average,
+            date: episode.airdate,
+            summary: episode.summary.replace(/<[^>]*>?/gm, '')
+          
+        }
+
+        return infoForModal
+
       })
-  
+
       setEpisodesInfo({
         showTitle: showDetails.data.name,
         episodeNames: episodeNames,
         episodeNumbers: episodeNumbers,
-        episodeRatings: episodeRatings
+        episodeRatings: episodeRatings,
+        modalData: modalData
       })
-
+      
       setShowInfo(showInformation)
       setShowLoading(false)
 
@@ -75,11 +90,13 @@ function ShowPage() {
       <h3 className='show-rating'>Average Rating: {showInfo.averageRating}</h3>
       </div>
       <div className='chart-container'>
-        <VerticalBarChart episodesInfo={episodesInfo}></VerticalBarChart>
+        <VerticalBarChart episodesInfo={episodesInfo} setModalData={setModalData} setShowModal={setShowModal}></VerticalBarChart>
       </div>
       </div>
+      {showModal ? <InfoModal showModal={showModal} setShowModal={setShowModal} modalData={modalData}></InfoModal> : null}
 
       </LoadingSpinner>
+
     </div>
   );
 }
