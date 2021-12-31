@@ -3,7 +3,7 @@ import '../../styles/ShowPage.css';
 import LoadingSpinner from '../sub-components/LoadingSpinner';
 import { getShowAndEpisodes } from '../../utils/api';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import VerticalBarChart from '../sub-components/VerticalBarChart';
+import ChartContainer from '../sub-components/ChartContainer';
 import InfoModal from '../sub-components/InfoModal';
 
 
@@ -90,7 +90,7 @@ function ShowPage() {
       <h3 className='show-rating'>Average Rating: {showInfo.averageRating}</h3>
       </div>
       <div className='chart-container'>
-        <VerticalBarChart episodesInfo={episodesInfo} setModalData={setModalData} setShowModal={setShowModal}></VerticalBarChart>
+        <ChartContainer episodesInfo={episodesInfo} setModalData={setModalData} setShowModal={setShowModal}></ChartContainer>
       </div>
       </div>
       {showModal ? <InfoModal showModal={showModal} setShowModal={setShowModal} modalData={modalData}></InfoModal> : null}
