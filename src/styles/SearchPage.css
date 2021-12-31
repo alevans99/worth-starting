@@ -3,6 +3,10 @@
 
 }
 
+header p{
+    margin: 50px;
+}
+
 .search-container{
     margin: 50px;
     display: flex;
@@ -14,11 +18,14 @@
 .search-input{
     font-size: 4rem;
     padding: 10px;
+    margin-right: 20px;
+
 }
 
 .search-submit-button{
     font-size: 3rem;
     padding: 10px;
+    margin-right: 20px;
 
 }
 

@@ -1,4 +1,8 @@
 .ShowPreview{
+    text-decoration: none;
+}
+
+.show-preview-container{
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -6,9 +10,13 @@
     max-width: 230px;
     text-align: center;
     font-size: 1.6rem;
+
 }
+
 
 .ShowPreview img {
     width: 210px;
     height: 295px;
 }
+
+

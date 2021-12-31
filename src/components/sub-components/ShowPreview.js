@@ -8,11 +8,11 @@ function ShowPreview({ showId, showImageSrc, showName }) {
   const showPath = { pathname: "/show", search: `?q=${showId}`};
   const linkState = {showImageSrc: showImageSrc}
   return (
-    <Link to={showPath}
+    <Link className="ShowPreview" to={showPath}
     state={linkState}
    >
       <div
-        className="ShowPreview"
+        className="show-preview-container"
       >
         <img src={showImageSrc} alt={`${showName} Poster`}></img>
         <h3>{showName}</h3>
