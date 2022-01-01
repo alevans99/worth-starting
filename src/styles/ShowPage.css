@@ -1,6 +1,6 @@
 .ShowPage{
     background-color: #90007d;
-
+    min-height: 100vh;
 }
 .show-container{
     width: 100%;

@@ -4,18 +4,21 @@ import { searchForShow } from "../../utils/api";
 import ShowPreview from "../sub-components/ShowPreview";
 import notFound from "../../assets/not-found.jpeg"
 import tv from "../../assets/television.png"
-
 import LoadingSpinner from "../sub-components/LoadingSpinner";
+import ErrorWarning from "../sub-components/ErrorWarning";
+import { imageCheck } from "../../utils/utils";
+
 function SearchPage({showsDisplayed, setShowsDisplayed, firstLoad, setFirstLoad}) {
   const [searchQuery, setSearchQuery] = useState("");
   // const [showsDisplayed, setShowsDisplayed] = useState([])
   const [showsHidden, setShowsHidden] = useState([])
   const [searchLoading, setSearchLoading] = useState(false)
-
+  const [errorDisplayed, setErrorDisplayed] = useState(false)
+  const errorText = "There was an error retrieving results."
 
   const submitSearch = () => {
     setFirstLoad(false)
-
+    setErrorDisplayed(false)
     setSearchLoading(true)
     searchForShow(searchQuery)
     .then((searchResult) => {
@@ -31,8 +34,8 @@ function SearchPage({showsDisplayed, setShowsDisplayed, firstLoad, setFirstLoad}
 
     })
     .catch((err) => {
-        console.log("Error With Search " + err)
         setSearchLoading(false)
+        setErrorDisplayed(true)
 
     })
   }
@@ -58,15 +61,16 @@ function SearchPage({showsDisplayed, setShowsDisplayed, firstLoad, setFirstLoad}
             submitSearch()
         }}>Search</button>
       </div>
+      <ErrorWarning errorDisplayed={errorDisplayed} errorText={errorText}></ErrorWarning>
         <LoadingSpinner isLoading={searchLoading}>
         <div className="search-result-container">
           {firstLoad && showsDisplayed.length < 1? <img className="placeholder-tv" alt="television" src={tv}></img> : null}
-        {showsDisplayed.length < 1 && !firstLoad ? <h2 className="no-results-text">No Results Found</h2> : showsDisplayed.map((show, index) => {
+        {showsDisplayed.length < 1 && !firstLoad && !errorDisplayed? <h2 className="no-results-text">No Results Found</h2> : showsDisplayed.map((show, index) => {
            
             let showImageSrc = notFound
-            if (show.image !== null && show.image.medium !== null){
-                showImageSrc = show.image.medium
-            }
+            if (imageCheck(show)){
+              showImageSrc = show.image.medium
+          }
             return <ShowPreview key={`${show.name}${index}`} showId={show.id} showImageSrc={showImageSrc} showName={show.name}></ShowPreview>
         }) }
 

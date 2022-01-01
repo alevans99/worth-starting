@@ -5,6 +5,9 @@ import { getShowAndEpisodes } from '../../utils/api';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import ChartContainer from '../sub-components/ChartContainer';
 import InfoModal from '../sub-components/InfoModal';
+import ErrorWarning from "../sub-components/ErrorWarning";
+import notFound from "../../assets/not-found.jpeg"
+import { imageCheck } from '../../utils/utils';
 
 
 function ShowPage() {
@@ -14,10 +17,12 @@ function ShowPage() {
   const [modalData, setModalData] = useState({})
   const location = useLocation()
   const [episodesInfo, setEpisodesInfo] = useState({})
-  const showImage = location.state.showImageSrc
-
+  // const showImage = location.state.showImageSrc
+  const [errorDisplayed, setErrorDisplayed] = useState(false)
+  const errorText = "Sorry! There was an error retrieving this show."
+  
   const [showInfo, setShowInfo] = useState({
-    image: showImage,
+    image: null,
     title: "",
     synopsis: "",
     year: "",
@@ -26,11 +31,18 @@ function ShowPage() {
 
   useEffect(() => {
     setShowLoading(true)
+    setErrorDisplayed(false)
     getShowAndEpisodes(searchParams.get('q'))
     .then(([showDetails, episodes]) => {
+      console.log(showDetails)
+
+      let showImageSrc = notFound
+      if (imageCheck(showDetails.data)){
+        showImageSrc = showDetails.data.image.medium
+    }
 
       const showInformation = {
-        image: showImage,
+        image: showImageSrc,
         title: showDetails.data.name,
         synopsis: showDetails.data.summary.replace(/<[^>]*>?/gm, ''),
         year: showDetails.data.premiered.slice(0,4),
@@ -71,8 +83,8 @@ function ShowPage() {
 
     })
     .catch((err) => {
-      console.log("Error getting episodes ", err)
       setShowLoading(false)
+      setErrorDisplayed(true)
 
     })
 
@@ -80,6 +92,8 @@ function ShowPage() {
 
   return (
     <div className="ShowPage">
+      <ErrorWarning errorDisplayed={errorDisplayed} errorText={errorText}>
+
       <LoadingSpinner isLoading={showLoading}>
       <div className='show-container'>
       <div className='show-info-container'>
@@ -96,7 +110,7 @@ function ShowPage() {
       {showModal ? <InfoModal showModal={showModal} setShowModal={setShowModal} modalData={modalData}></InfoModal> : null}
 
       </LoadingSpinner>
-
+      </ErrorWarning>
     </div>
   );
 }
