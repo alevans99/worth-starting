@@ -1,7 +1,7 @@
 .ShowLoadingSpinner{
     display: flex;
     justify-content: center;
-    
+    background-color: #ffa7f300;
 }
 
 .loading-spinner-image{

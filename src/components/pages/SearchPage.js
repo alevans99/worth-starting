@@ -3,8 +3,10 @@ import "../../styles/SearchPage.css";
 import { searchForShow } from "../../utils/api";
 import ShowPreview from "../sub-components/ShowPreview";
 import notFound from "../../assets/not-found.jpeg"
+import tv from "../../assets/television.png"
+
 import LoadingSpinner from "../sub-components/LoadingSpinner";
-function SearchPage({showsDisplayed, setShowsDisplayed}) {
+function SearchPage({showsDisplayed, setShowsDisplayed, firstLoad, setFirstLoad}) {
   const [searchQuery, setSearchQuery] = useState("");
   // const [showsDisplayed, setShowsDisplayed] = useState([])
   const [showsHidden, setShowsHidden] = useState([])
@@ -12,6 +14,8 @@ function SearchPage({showsDisplayed, setShowsDisplayed}) {
 
 
   const submitSearch = () => {
+    setFirstLoad(false)
+
     setSearchLoading(true)
     searchForShow(searchQuery)
     .then((searchResult) => {
@@ -50,20 +54,21 @@ function SearchPage({showsDisplayed, setShowsDisplayed}) {
             setSearchQuery(e.target.value);
           }}
         ></input>
-        <button className="search-submit-button" onClick={() => {
+        <button className="button" onClick={() => {
             submitSearch()
         }}>Search</button>
       </div>
         <LoadingSpinner isLoading={searchLoading}>
         <div className="search-result-container">
-        {showsDisplayed.map((show, index) => {
-            console.log(show)
+          {firstLoad && showsDisplayed.length < 1? <img className="placeholder-tv" alt="television" src={tv}></img> : null}
+        {showsDisplayed.length < 1 && !firstLoad ? <h2 className="no-results-text">No Results Found</h2> : showsDisplayed.map((show, index) => {
+           
             let showImageSrc = notFound
             if (show.image !== null && show.image.medium !== null){
                 showImageSrc = show.image.medium
             }
             return <ShowPreview key={`${show.name}${index}`} showId={show.id} showImageSrc={showImageSrc} showName={show.name}></ShowPreview>
-        })}
+        }) }
 
         </div>
         </LoadingSpinner>

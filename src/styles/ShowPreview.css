@@ -1,5 +1,7 @@
 .ShowPreview{
     text-decoration: none;
+    color: #000;
+
 }
 
 .show-preview-container{
@@ -17,6 +19,7 @@
 .ShowPreview img {
     width: 210px;
     height: 295px;
+    border-radius: 6px;
 }
 
 

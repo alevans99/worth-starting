@@ -1,18 +1,27 @@
 .InfoModal{
     position: fixed;
-    width: 99vw;
-    height: 100vh;
-    background-color: rgba(255, 255, 255, 0.897);
+    margin-top: 10vh;
+    width: 50vw;
+    height: 80vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    background-color: #ffa7f3;
+    color: #000;
+    border: 4px #000 solid;
 }
 
 .modal-info-container{
     display: flex;
     flex-direction: column;
-    margin: 100px;
+    margin: 40px;
     align-items: center;
-    overflow: scroll;
+    overflow-y: scroll;
+    padding-bottom: 20px;
+
+
 }
 .modal-info-container h2{
     font-size: 3rem;
@@ -22,10 +31,15 @@
 .modal-info-container h3{
     font-size: 2rem;
     width: 80%;
+    
 }
 
+.modal-summary{
+    line-height: 1.5;
+}
 
 .modal-close{
     width: 200px;
     height: 100px;
+    margin-top: 20px;
 }
