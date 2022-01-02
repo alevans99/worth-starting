@@ -1,5 +1,5 @@
 .ShowPage{
-    background-color: #90007d;
+    background-color: #1C0F13;
     min-height: 100vh;
 }
 .show-container{
@@ -7,8 +7,8 @@
     margin: 60px 100px;
     display: flex;
     flex-direction: column;
-    background-color: #fff;
-    color: #000;
+    background-color: #1C0F13;
+    color: #fff;
     font-family: 'Lato', sans-serif;
     border-radius: 6px;
 }
@@ -46,7 +46,7 @@
 }
 .show-title{
     grid-area: title;
-    color: #000;
+    color: #fff;
 }
 .show-synopsis{
     grid-area: synopsis;

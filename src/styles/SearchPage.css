@@ -1,27 +1,21 @@
 .SearchPage{
-    padding-top: 40px;
-    background-color: #ffa7f3;
+    background-color: #1C0F13;
     min-height: 100vh;
     font-family: 'Lato', sans-serif;
-
-    color: #000000;
-
+    color: #fff;
 
 }
 
-.SearchPage h1{
-    font-family: 'Pushster', cursive;
-    margin-top: 0;
-    color: #6B0F1A;
 
 
-}
-
-header p{
-    margin: 50px;
+.intro-text{
+    margin: 0 50px;
     font-size: 2.4rem;
-
+    text-align: center;
+    padding-top: 40px;
 }
+
+
 
 .search-container{
     margin: 50px;
@@ -36,14 +30,16 @@ header p{
     padding: 10px;
     margin-right: 20px;
     border-radius: 6px;
+    background-color: #B7CECE;
+
 }
 
 .button{
     font-size: 3rem;
     padding: 20px;
     margin-right: 20px;
-    background-color: #6B0F1A;
-    color: #fff;  
+    background-color: #B7CECE;
+    color: #1C0F13;  
     font-family: 'Lato', sans-serif;
     height: 140px;
     width: 200px;
@@ -51,13 +47,14 @@ header p{
     
 }
 .button:hover{
-    background-color: #fff;
-    color: #6B0F1A;
+    background-color: #6E7E85;
+    color: #B7CECE;
+    cursor: pointer;
 }
 
 .button:active{
-    background-color: #6b2a31;
-    color: #fff;  
+    background-color: #def1f1;
+    color: #1C0F13;  
 
 }
 

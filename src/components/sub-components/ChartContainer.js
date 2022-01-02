@@ -27,7 +27,7 @@ function ChartContainer({ episodesInfo, setModalData,setShowModal }) {
 
   const handleEpisodeClick = (event) => {
     const episodeElement = getElementAtEvent(chartRef.current, event);
-    if (episodeElement[0] != undefined){
+    if (episodeElement[0] !== undefined){
         const episodeIndex = episodeElement[0].index
         setModalData(episodesInfo.modalData[episodeIndex])
         setShowModal(true)
@@ -40,7 +40,7 @@ function ChartContainer({ episodesInfo, setModalData,setShowModal }) {
     labels: episodesInfo.episodeNumbers,
     datasets: [
       {
-        label: "Episode Ratings",
+        label: "Episode Rating",
         data: episodesInfo.episodeRatings,
         // backgroundColor: "#fbf700",
         backgroundColor: "#000",
@@ -58,10 +58,52 @@ function ChartContainer({ episodesInfo, setModalData,setShowModal }) {
         // min: 0,
         ticks: {
           stepSize: 0.5,
+          font: {
+            size: 30,
+            family: "'Lato', sans-serif"
+
+        }
         },
         beginAtZero: false,
       },
+      x: {
+        ticks: {
+          font: {
+            size: 30,
+            family: "'Lato', sans-serif"
+        }
+        },
+      
+      },
     },
+    plugins: {
+      legend: {
+          labels: {
+              font: {
+                  size: 40,
+                  family: "'Lato', sans-serif"
+
+              }
+          }
+      },
+      tooltip: {
+        titleFont:{
+          size: 40,
+          family: "'Lato', sans-serif"
+        },
+        bodyFont: {
+          size: 30,
+          family: "'Lato', sans-serif" 
+               },
+        footerFont: {
+          size: 30,
+          family: "'Lato', sans-serif" 
+        }
+      }
+  }
+
+  
+
   };
 
   const horizontalOptions = {

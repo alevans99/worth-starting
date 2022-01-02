@@ -1,16 +1,16 @@
 .InfoModal{
     position: fixed;
-    margin-top: 10vh;
+    /* margin-top: 10vh; */
     width: 50vw;
-    height: 80vh;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 6px;
     font-family: 'Lato', sans-serif;
-    background-color: #ffa7f3;
-    color: #000;
-    border: 4px #000 solid;
+    background-color: #1C0F13;
+    color: #fff;
+    border: 4px #fff solid;
 }
 
 .modal-info-container{

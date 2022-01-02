@@ -42,13 +42,12 @@ function SearchPage({showsDisplayed, setShowsDisplayed, firstLoad, setFirstLoad}
   
   return (
     <div className="SearchPage">
-      <header>
-        <h1>Worth Starting?</h1>
-        <p>
+   
+        <p className="intro-text">
           Search for a TV series to see whether there is a ratings drop-off and
           decide whether it's worth starting!
         </p>
-      </header>
+
 
       <div className="search-container">
         <input className="search-input"
