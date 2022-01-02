@@ -62,7 +62,7 @@ function ShowPage() {
             title: `S${episode.season}:E${episode.number}: ${episode.name}`,
             rating: episode.rating.average,
             date: episode.airdate,
-            summary: episode.summary.replace(/<[^>]*>?/gm, '')
+            summary: episode.summary?.replace(/<[^>]*>?/gm, '')
           
         }
 
@@ -85,7 +85,7 @@ function ShowPage() {
     .catch((err) => {
       setShowLoading(false)
       setErrorDisplayed(true)
-
+      console.log(err)
     })
 
   }, [])

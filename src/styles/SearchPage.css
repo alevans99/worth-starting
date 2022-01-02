@@ -1,9 +1,8 @@
 .SearchPage{
     background-color: #1C0F13;
-    min-height: 100vh;
     font-family: 'Lato', sans-serif;
-    color: #fff;
-
+    color: #ffffff;
+    flex-grow: 1;
 }
 
 

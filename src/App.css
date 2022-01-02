@@ -1,5 +1,8 @@
 .App{
-    background-color: #ffa7f3;
+    background-color: #1C0F13;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 
