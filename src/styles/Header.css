@@ -1,0 +1,15 @@
+.Header{
+    display: flex;
+    justify-content: center;
+    padding: 60px;
+    background-color: #B7CECE;
+
+}
+
+.Header h1{
+    font-family: 'Pushster', cursive;
+    margin: 0;
+    color: #1C0F13;
+    font-size: 5rem;
+    text-align: center;
+}
