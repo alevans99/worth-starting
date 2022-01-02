@@ -63,7 +63,7 @@
 }
 
 
-@media only screen and (max-width: 740px) {
+@media only screen and (max-width: 840px) {
     .show-info-container{
         grid-template-rows: repeat(5, min-content);
         grid-template-areas: 
@@ -73,6 +73,9 @@
         "year year" 
         "rating rating";
         justify-items: center;
+        padding-top: 0;
+        margin-top: 0;
+
     
     }
     .show-image{
@@ -84,11 +87,13 @@
 
     .show-container h2{
         font-size: 3rem;
-        
+        text-align: center;
+
     }
     
     .show-container h3{
         font-size: 1.4rem;
+        text-align: center;
     
     }
 
