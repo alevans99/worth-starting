@@ -55,6 +55,11 @@ function SearchPage({showsDisplayed, setShowsDisplayed, firstLoad, setFirstLoad}
           onChange={(e) => {
             setSearchQuery(e.target.value);
           }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter'){
+              submitSearch()
+            } 
+          }}
         ></input>
         <button className="button" onClick={() => {
             submitSearch()

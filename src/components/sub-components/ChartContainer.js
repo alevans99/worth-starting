@@ -106,8 +106,7 @@ function ChartContainer({ episodesInfo, setModalData,setShowModal }) {
       {
         label: "Episode Rating",
         data: episodesInfo.episodeRatings,
-        // backgroundColor: "#fbf700",
-        backgroundColor: "#000",
+        backgroundColor: "#1C0F13",
 
       },
     ],

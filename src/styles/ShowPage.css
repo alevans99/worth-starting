@@ -22,7 +22,8 @@
     "image synopsis" 
     "image year" 
     "image rating";
-    padding: 60px;
+    padding: 60px 0;
+    margin: 20px;
 
 }
 
@@ -60,3 +61,35 @@
     grid-area: rating;
 
 }
+
+
+@media only screen and (max-width: 740px) {
+    .show-info-container{
+        grid-template-rows: repeat(5, min-content);
+        grid-template-areas: 
+        "image image"
+        "title title" 
+        "synopsis synopsis" 
+        "year year" 
+        "rating rating";
+        justify-items: center;
+    
+    }
+    .show-image{
+        height: 300px;
+        margin-right: 0;
+        margin-bottom: 20px;
+
+    }
+
+    .show-container h2{
+        font-size: 3rem;
+        
+    }
+    
+    .show-container h3{
+        font-size: 1.4rem;
+    
+    }
+
+  }

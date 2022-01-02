@@ -43,3 +43,11 @@
     height: 100px;
     margin-top: 20px;
 }
+
+@media only screen and (max-width: 720px) {
+    .InfoModal{
+       
+        width: 90vw;
+       
+    }
+  }

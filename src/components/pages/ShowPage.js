@@ -30,12 +30,11 @@ function ShowPage() {
   })
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     setShowLoading(true)
     setErrorDisplayed(false)
     getShowAndEpisodes(searchParams.get('q'))
     .then(([showDetails, episodes]) => {
-      console.log(showDetails)
-
       let showImageSrc = notFound
       if (imageCheck(showDetails.data)){
         showImageSrc = showDetails.data.image.medium
@@ -44,7 +43,7 @@ function ShowPage() {
       const showInformation = {
         image: showImageSrc,
         title: showDetails.data.name,
-        synopsis: showDetails.data.summary.replace(/<[^>]*>?/gm, ''),
+        synopsis: showDetails.data.summary?.replace(/<[^>]*>?/gm, ''),
         year: showDetails.data.premiered.slice(0,4),
         averageRating: showDetails.data.rating.average
       }
@@ -85,7 +84,6 @@ function ShowPage() {
     .catch((err) => {
       setShowLoading(false)
       setErrorDisplayed(true)
-      console.log(err)
     })
 
   }, [])
