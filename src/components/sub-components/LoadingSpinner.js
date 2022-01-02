@@ -1,5 +1,5 @@
 import '../../styles/LoadingSpinner.css';
-import loadingSpinnerImage from '../../assets/loading-spinner-black.svg'
+import loadingSpinnerImage from '../../assets/loading-spinner-white.svg'
 
 
 function LoadingSpinner({children, isLoading}) {

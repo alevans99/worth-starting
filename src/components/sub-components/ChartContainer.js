@@ -35,7 +35,71 @@ function ChartContainer({ episodesInfo, setModalData,setShowModal }) {
 
   };
 
-  console.log(screenIsPortrait())
+  const createChartOptions = (screenIsPortrait) =>{
+
+    const chartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: screenIsPortrait ? 'y' : 'x',
+
+      scales: {
+        y: {
+          max: !screenIsPortrait ? 10 : null,
+          // min: 0,
+          ticks: {
+            stepSize: !screenIsPortrait ? 0.5 : null,
+            font: {
+              size: 30,
+              family: "'Lato', sans-serif"
+          }
+          },
+          beginAtZero: !screenIsPortrait ? false : null
+        },
+        x: {
+          max: screenIsPortrait ? 10 : null,
+          ticks: {
+            stepSize: screenIsPortrait ? 0.5 : null,
+            font: {
+              size: 30,
+              family: "'Lato', sans-serif"
+          },
+          beginAtZero: screenIsPortrait ? false : null
+          },
+        
+        },
+      },
+      plugins: {
+        legend: {
+            labels: {
+                font: {
+                    size: 40,
+                    family: "'Lato', sans-serif"
+  
+                }
+            }
+        },
+        tooltip: {
+          titleFont:{
+            size: 40,
+            family: "'Lato', sans-serif"
+          },
+          bodyFont: {
+            size: 30,
+            family: "'Lato', sans-serif" 
+                 },
+          footerFont: {
+            size: 30,
+            family: "'Lato', sans-serif" 
+          }
+        }
+    }
+  
+    };
+
+    return chartOptions
+  }
+
+
   const data = {
     labels: episodesInfo.episodeNumbers,
     datasets: [
@@ -49,85 +113,14 @@ function ChartContainer({ episodesInfo, setModalData,setShowModal }) {
     ],
   };
 
-  const verticalOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        max: 10,
-        // min: 0,
-        ticks: {
-          stepSize: 0.5,
-          font: {
-            size: 30,
-            family: "'Lato', sans-serif"
 
-        }
-        },
-        beginAtZero: false,
-      },
-      x: {
-        ticks: {
-          font: {
-            size: 30,
-            family: "'Lato', sans-serif"
-        }
-        },
-      
-      },
-    },
-    plugins: {
-      legend: {
-          labels: {
-              font: {
-                  size: 40,
-                  family: "'Lato', sans-serif"
-
-              }
-          }
-      },
-      tooltip: {
-        titleFont:{
-          size: 40,
-          family: "'Lato', sans-serif"
-        },
-        bodyFont: {
-          size: 30,
-          family: "'Lato', sans-serif" 
-               },
-        footerFont: {
-          size: 30,
-          family: "'Lato', sans-serif" 
-        }
-      }
-  }
-
-  
-
-  };
-
-  const horizontalOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    indexAxis: 'y',
-    scales: {
-      x: {
-        max: 10,
-        // min: 0,
-        ticks: {
-          stepSize: 0.5,
-        },
-        beginAtZero: false,
-      },
-    },
-  };
   return (
     <div className={`ChartContainer ${screenIsPortrait() ? `horizontal-chart` : `vertical-chart`}`}>
       
       <Bar
         ref={chartRef}
         className="chart"
-        options={screenIsPortrait() ? horizontalOptions : verticalOptions}
+        options={createChartOptions(screenIsPortrait())}
         data={data}
         onClick={handleEpisodeClick}
       ></Bar>
