@@ -44,10 +44,30 @@
     margin-top: 20px;
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 830px) {
     .InfoModal{
-       
         width: 90vw;
-       
+    }
+    .modal-close{
+        width: 140px;
+        height: 80px;
+        font-size: 1.4rem;
+    }
+    .modal-info-container{
+ 
+        margin: 10px;
+        padding-bottom: 10px;
+    
+    }
+
+    .modal-info-container h2{
+        font-size: 2rem;
+        margin: 10px;
+    
+    }
+    .modal-info-container h3{
+        font-size: 1.4rem;
+        width: 90%;
+        
     }
   }

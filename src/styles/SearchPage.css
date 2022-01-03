@@ -26,7 +26,7 @@
 
 .search-input{
     max-width: 80%;
-    font-size: 4rem;
+    font-size: 3rem;
     padding: 10px;
     margin-right: 20px;
     border-radius: 6px;
@@ -36,14 +36,14 @@
 }
 
 .button{
-    font-size: 3rem;
+    font-size: 2rem;
     padding: 20px;
     margin-right: 20px;
     background-color: #B7CECE;
     color: #1C0F13;  
     font-family: 'Lato', sans-serif;
-    height: 140px;
-    width: 200px;
+    height: 100px;
+    width: 160px;
     border-radius: 6px;
     
 }
@@ -60,7 +60,7 @@
 }
 
 .placeholder-tv{
-    height: 400px;
+    height: 300px;
 }
 
 .search-result-container{
