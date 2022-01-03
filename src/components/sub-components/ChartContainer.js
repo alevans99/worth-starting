@@ -6,25 +6,31 @@ import lineChartIcon from "../../assets/line-chart-icon.svg";
 import {
   Chart as ChartJS,
   CategoryScale,
+  BarController,
+  LineController,
   LinearScale,
   BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
-  PointElement,
-  LineElement,
+
 } from "chart.js";
 import { useRef, useState } from "react";
 
 ChartJS.register(
   CategoryScale,
+  BarController,
+  LineController,
   LinearScale,
   BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
-  PointElement,
-  LineElement
+
 );
 
 function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
@@ -32,7 +38,7 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
   // const dataSetIdKey = episodesInfo.showName;
   const [chartOrientation, setChartOrientation] = useState("vertical");
   const [chartType, setChartType] = useState("bar");
-
+  const fontSize = window.innerWidth / 100 * 1.5 > 10 ? window.innerWidth / 100 * 1.5 : 10
   const chartButtons = [
     { type: "bar", orientation: "vertical" },
     { type: "bar", orientation: "horizontal" },
@@ -76,7 +82,7 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
           ticks: {
             stepSize: !chartIsHorizontal ? 0.5 : null,
             font: {
-              size: 20,
+              size: fontSize,
               family: "'Lato', sans-serif",
             },
           },
@@ -87,7 +93,7 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
           ticks: {
             stepSize: chartIsHorizontal ? 0.5 : null,
             font: {
-              size: 20,
+              size: fontSize,
               family: "'Lato', sans-serif",
             },
             beginAtZero: chartIsHorizontal ? false : null,
@@ -98,22 +104,22 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
         legend: {
           labels: {
             font: {
-              size: 30,
+              size: fontSize,
               family: "'Lato', sans-serif",
             },
           },
         },
         tooltip: {
           titleFont: {
-            size: 30,
+            size: fontSize,
             family: "'Lato', sans-serif",
           },
           bodyFont: {
-            size: 20,
+            size: fontSize,
             family: "'Lato', sans-serif",
           },
           footerFont: {
-            size: 20,
+            size: fontSize,
             family: "'Lato', sans-serif",
           },
         },
@@ -130,6 +136,9 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
         label: "Episode Rating",
         data: episodesInfo.episodeRatings,
         backgroundColor: "#1C0F13",
+        pointHoverRadius: 10,
+        pointHoverBackgroundColor: '#8d1539',
+        hoverBackgroundColor:'#8d1539'
       },
     ],
   };
