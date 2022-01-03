@@ -1,5 +1,6 @@
 .InfoModal{
     position: fixed;
+    top: 20%;
     /* margin-top: 10vh; */
     width: 50vw;
     height: 60vh;
@@ -16,21 +17,23 @@
 .modal-info-container{
     display: flex;
     flex-direction: column;
-    margin: 40px;
+    margin: 10px;
     align-items: center;
     overflow-y: scroll;
     padding-bottom: 20px;
-
+    margin-bottom: 20px;
 
 }
 .modal-info-container h2{
     font-size: 3rem;
-    margin: 40px;
+    margin: 20px;
+    text-align: center;
 
 }
 .modal-info-container h3{
     font-size: 2rem;
-    width: 80%;
+    width: 90%;
+    
     
 }
 
@@ -47,6 +50,7 @@
 @media only screen and (max-width: 830px) {
     .InfoModal{
         width: 90vw;
+        top: 20%;
     }
     .modal-close{
         width: 140px;

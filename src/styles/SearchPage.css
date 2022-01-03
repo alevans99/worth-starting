@@ -28,7 +28,6 @@
     max-width: 80%;
     font-size: 3rem;
     padding: 10px;
-    margin-right: 20px;
     border-radius: 6px;
     background-color: #B7CECE;
     flex-shrink: 1;
@@ -38,7 +37,6 @@
 .button{
     font-size: 2rem;
     padding: 20px;
-    margin-right: 20px;
     background-color: #B7CECE;
     color: #1C0F13;  
     font-family: 'Lato', sans-serif;
