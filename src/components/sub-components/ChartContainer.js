@@ -138,6 +138,7 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
         backgroundColor: "#1C0F13",
         pointHoverRadius: 10,
         pointHoverBackgroundColor: '#8d1539',
+        pointHitRadius: 50,
         hoverBackgroundColor:'#8d1539'
       },
     ],
