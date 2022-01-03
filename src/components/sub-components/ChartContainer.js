@@ -1,5 +1,8 @@
 import "../../styles/ChartContainer.css";
-import { Bar, getElementAtEvent } from "react-chartjs-2";
+import { getElementAtEvent, Chart } from "react-chartjs-2";
+import barChartIcon from "../../assets/bar-chart-icon.svg";
+import lineChartIcon from "../../assets/line-chart-icon.svg";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,9 +11,10 @@ import {
   Title,
   Tooltip,
   Legend,
+  PointElement,
+  LineElement,
 } from "chart.js";
-import { useRef } from "react";
-import { screenIsPortrait } from "../../utils/utils";
+import { useRef, useState } from "react";
 
 ChartJS.register(
   CategoryScale,
@@ -18,87 +22,106 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  PointElement,
+  LineElement
 );
 
-function ChartContainer({ episodesInfo, setModalData,setShowModal }) {
+function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
   const chartRef = useRef();
-  const dataSetIdKey = episodesInfo.showName;
+  // const dataSetIdKey = episodesInfo.showName;
+  const [chartOrientation, setChartOrientation] = useState("vertical");
+  const [chartType, setChartType] = useState("bar");
+
+  const chartButtons = [
+    { type: "bar", orientation: "vertical" },
+    { type: "bar", orientation: "horizontal" },
+    { type: "line", orientation: "vertical" },
+    { type: "line", orientation: "horizontal" },
+  ];
 
   const handleEpisodeClick = (event) => {
     const episodeElement = getElementAtEvent(chartRef.current, event);
-    if (episodeElement[0] !== undefined){
-        const episodeIndex = episodeElement[0].index
-        setModalData(episodesInfo.modalData[episodeIndex])
-        setShowModal(true)
+    if (episodeElement[0] !== undefined) {
+      const episodeIndex = episodeElement[0].index;
+      setModalData(episodesInfo.modalData[episodeIndex]);
+      setShowModal(true);
     }
-
   };
 
-  const createChartOptions = (screenIsPortrait) =>{
+  const handleChartButtonClick = (
+    chartOrientationSelected,
+    chartTypeSelected
+  ) => {
+    setChartOrientation(chartOrientationSelected);
+
+    if (chartType !== chartTypeSelected) {
+      setChartType(chartTypeSelected);
+      chartRef.current.config.type = chartTypeSelected;
+    }
+  };
+
+  const createChartOptions = () => {
+    const chartIsHorizontal = chartOrientation === "horizontal";
 
     const chartOptions = {
       responsive: true,
       maintainAspectRatio: false,
-      indexAxis: screenIsPortrait ? 'y' : 'x',
+      indexAxis: chartIsHorizontal ? "y" : "x",
 
       scales: {
         y: {
-          max: !screenIsPortrait ? 10 : null,
+          max: !chartIsHorizontal ? 10 : null,
           // min: 0,
           ticks: {
-            stepSize: !screenIsPortrait ? 0.5 : null,
+            stepSize: !chartIsHorizontal ? 0.5 : null,
             font: {
-              size: 30,
-              family: "'Lato', sans-serif"
-          }
+              size: 20,
+              family: "'Lato', sans-serif",
+            },
           },
-          beginAtZero: !screenIsPortrait ? false : null
+          beginAtZero: !chartIsHorizontal ? false : null,
         },
         x: {
-          max: screenIsPortrait ? 10 : null,
+          max: chartIsHorizontal ? 10 : null,
           ticks: {
-            stepSize: screenIsPortrait ? 0.5 : null,
+            stepSize: chartIsHorizontal ? 0.5 : null,
             font: {
-              size: 30,
-              family: "'Lato', sans-serif"
+              size: 20,
+              family: "'Lato', sans-serif",
+            },
+            beginAtZero: chartIsHorizontal ? false : null,
           },
-          beginAtZero: screenIsPortrait ? false : null
-          },
-        
         },
       },
       plugins: {
         legend: {
-            labels: {
-                font: {
-                    size: 40,
-                    family: "'Lato', sans-serif"
-  
-                }
-            }
+          labels: {
+            font: {
+              size: 30,
+              family: "'Lato', sans-serif",
+            },
+          },
         },
         tooltip: {
-          titleFont:{
-            size: 40,
-            family: "'Lato', sans-serif"
+          titleFont: {
+            size: 30,
+            family: "'Lato', sans-serif",
           },
           bodyFont: {
-            size: 30,
-            family: "'Lato', sans-serif" 
-                 },
+            size: 20,
+            family: "'Lato', sans-serif",
+          },
           footerFont: {
-            size: 30,
-            family: "'Lato', sans-serif" 
-          }
-        }
-    }
-  
+            size: 20,
+            family: "'Lato', sans-serif",
+          },
+        },
+      },
     };
 
-    return chartOptions
-  }
-
+    return chartOptions;
+  };
 
   const data = {
     labels: episodesInfo.episodeNumbers,
@@ -107,22 +130,55 @@ function ChartContainer({ episodesInfo, setModalData,setShowModal }) {
         label: "Episode Rating",
         data: episodesInfo.episodeRatings,
         backgroundColor: "#1C0F13",
-
       },
     ],
   };
 
-
   return (
-    <div className={`ChartContainer ${screenIsPortrait() ? `horizontal-chart` : `vertical-chart`}`}>
-      
-      <Bar
-        ref={chartRef}
-        className="chart"
-        options={createChartOptions(screenIsPortrait())}
-        data={data}
-        onClick={handleEpisodeClick}
-      ></Bar>
+    <div className="ChartContainer">
+      <div className="chart-button-container">
+        {chartButtons.map((button, index) => {
+          const buttonSelected =
+            chartOrientation === button.orientation &&
+            chartType === button.type;
+
+          const iconToUse =
+            button.type === "bar" ? barChartIcon : lineChartIcon;
+
+          return (
+            <img
+              key={`${button.type}${index}`}
+              className={`${button.orientation}-${
+                button.type
+              }-button chart-button ${
+                buttonSelected ? "chart-button-selected" : ""
+              }`}
+              alt={`${button.orientation} ${button.type} chart`}
+              src={iconToUse}
+              onClick={() => {
+                handleChartButtonClick(button.orientation, button.type);
+              }}
+            ></img>
+          );
+        })}
+      </div>
+
+      <div
+        className={`${
+          chartOrientation === "horizontal"
+            ? `horizontal-chart`
+            : `vertical-chart`
+        }`}
+      >
+        <Chart
+          type={chartType}
+          ref={chartRef}
+          className="chart"
+          options={createChartOptions()}
+          data={data}
+          onClick={handleEpisodeClick}
+        ></Chart>
+      </div>
     </div>
   );
 }

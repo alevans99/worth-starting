@@ -14,3 +14,37 @@
     height: 500px;
 
 }
+
+.chart-button-container{
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+}
+.horizontal-bar-button, .horizontal-line-button{
+    transform: rotate(90deg);
+}
+
+
+.chart-button{
+    background-color: #fff;
+    border: 1px #1C0F13 solid;
+    border-radius: 6px;
+    height: 60px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px #1C0F13;
+}
+
+.chart-button:hover{
+    background-color: #B7CECE;
+
+}
+
+.chart-button-selected{
+    background-color: #B7CECE;
+
+}
+
+.chart-button:active{
+    background-color: #d8e0e0;
+
+}
