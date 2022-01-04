@@ -44,7 +44,7 @@ function SearchPage({showsDisplayed, setShowsDisplayed, firstLoad, setFirstLoad}
     <div className="SearchPage">
    
         <p className="intro-text">
-          Search for a TV series to see whether there is a ratings drop-off and
+          Search for a TV series and check the episode ratings to
           decide whether it's worth starting!
         </p>
 
