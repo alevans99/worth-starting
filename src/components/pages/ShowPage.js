@@ -17,7 +17,11 @@ function ShowPage() {
   const [episodesInfo, setEpisodesInfo] = useState({});
   // const showImage = location.state.showImageSrc
   const [errorDisplayed, setErrorDisplayed] = useState(false);
+  const [noRatingsErrorDisplayed, setNoRatingsErrorDisplayed] = useState(false);
+
   const errorText = "Sorry! There was an error retrieving this show.";
+  const noRatingsErrorText =
+    "Sorry! No users have rated this show's episodes yet.";
 
   const [showInfo, setShowInfo] = useState({
     image: null,
@@ -42,7 +46,7 @@ function ShowPage() {
           image: showImageSrc,
           title: showDetails.data.name,
           synopsis: showDetails.data.summary?.replace(/<[^>]*>?/gm, ""),
-          year: showDetails.data.premiered.slice(0, 4),
+          year: showDetails.data.premiered?.slice(0, 4),
           averageRating: showDetails.data.rating.average,
         };
 
@@ -64,16 +68,27 @@ function ShowPage() {
           return infoForModal;
         });
 
-        setEpisodesInfo({
-          showTitle: showDetails.data.name,
-          episodeNames: episodeNames,
-          episodeNumbers: episodeNumbers,
-          episodeRatings: episodeRatings,
-          modalData: modalData,
-        });
+        //Checks whether any of the episodes have ratings
+        if (
+          episodeRatings.every((episode) => {
+            return episode === null;
+          })
+        ) {
+          setShowLoading(false);
+          setShowInfo(showInformation);
+          setNoRatingsErrorDisplayed(true);
+        } else {
+          setEpisodesInfo({
+            showTitle: showDetails.data.name,
+            episodeNames: episodeNames,
+            episodeNumbers: episodeNumbers,
+            episodeRatings: episodeRatings,
+            modalData: modalData,
+          });
 
-        setShowInfo(showInformation);
-        setShowLoading(false);
+          setShowInfo(showInformation);
+          setShowLoading(false);
+        }
       })
       .catch((err) => {
         setShowLoading(false);
@@ -95,13 +110,18 @@ function ShowPage() {
                 Average Rating: {showInfo.averageRating}
               </h3>
             </div>
-            <div className="chart-container">
-              <ChartContainer
-                episodesInfo={episodesInfo}
-                setModalData={setModalData}
-                setShowModal={setShowModal}
-              ></ChartContainer>
-            </div>
+            <ErrorWarning
+              errorDisplayed={noRatingsErrorDisplayed}
+              errorText={noRatingsErrorText}
+            >
+              <div className="chart-container">
+                <ChartContainer
+                  episodesInfo={episodesInfo}
+                  setModalData={setModalData}
+                  setShowModal={setShowModal}
+                ></ChartContainer>
+              </div>
+            </ErrorWarning>
           </div>
           {showModal ? (
             <InfoModal
