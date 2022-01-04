@@ -20,7 +20,7 @@ To deploy this project on your local machine, follow the instructions below.
 Clone the project:
 
 ```bash
-git clone https://alevans99/worth-starting.git
+git clone https://github.com/alevans99/worth-starting.git
 ```
 Navigate to the cloned project folder:
 
