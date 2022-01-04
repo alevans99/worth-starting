@@ -8,21 +8,29 @@ import Footer from "./components/sub-components/Footer";
 
 function App() {
   const [showsDisplayed, setShowsDisplayed] = useState([]);
-  const [firstLoad, setFirstLoad] = useState(true)
-  
+  const [firstLoad, setFirstLoad] = useState(true);
+
   return (
-    
     <BrowserRouter>
       <div className="App">
         <Header></Header>
         <Routes>
-          <Route path="/" element={<SearchPage showsDisplayed={showsDisplayed} setShowsDisplayed={setShowsDisplayed} firstLoad={firstLoad} setFirstLoad={setFirstLoad}/>} />
+          <Route
+            path="/"
+            element={
+              <SearchPage
+                showsDisplayed={showsDisplayed}
+                setShowsDisplayed={setShowsDisplayed}
+                firstLoad={firstLoad}
+                setFirstLoad={setFirstLoad}
+              />
+            }
+          />
           <Route path="/show" element={<ShowPage />} />
-          <Route path="/*" element={<Navigate replace to={'/'} />} />
+          <Route path="/*" element={<Navigate replace to={"/"} />} />
         </Routes>
         <Footer></Footer>
       </div>
-
     </BrowserRouter>
   );
 }

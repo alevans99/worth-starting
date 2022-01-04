@@ -15,7 +15,6 @@ import {
   Title,
   Tooltip,
   Legend,
-
 } from "chart.js";
 import { useRef, useState } from "react";
 
@@ -29,8 +28,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
-
+  Legend
 );
 
 function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
@@ -38,7 +36,8 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
   // const dataSetIdKey = episodesInfo.showName;
   const [chartOrientation, setChartOrientation] = useState("vertical");
   const [chartType, setChartType] = useState("bar");
-  const fontSize = window.innerWidth / 100 * 1.5 > 10 ? window.innerWidth / 100 * 1.5 : 10
+  const fontSize =
+    (window.innerWidth / 100) * 1.5 > 10 ? (window.innerWidth / 100) * 1.5 : 10;
   const chartButtons = [
     { type: "bar", orientation: "vertical" },
     { type: "bar", orientation: "horizontal" },
@@ -137,9 +136,9 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
         data: episodesInfo.episodeRatings,
         backgroundColor: "#1C0F13",
         pointHoverRadius: 10,
-        pointHoverBackgroundColor: '#8d1539',
+        pointHoverBackgroundColor: "#8d1539",
         pointHitRadius: 50,
-        hoverBackgroundColor:'#8d1539'
+        hoverBackgroundColor: "#8d1539",
       },
     ],
   };
