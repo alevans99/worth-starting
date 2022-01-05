@@ -77,6 +77,8 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
       scales: {
         y: {
           max: !chartIsHorizontal ? 10 : null,
+          beginAtZero: !chartIsHorizontal ? false : true,
+
           // min: 0,
           ticks: {
             stepSize: !chartIsHorizontal ? 0.5 : null,
@@ -85,17 +87,17 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
               family: "'Lato', sans-serif",
             },
           },
-          beginAtZero: !chartIsHorizontal ? false : null,
         },
         x: {
           max: chartIsHorizontal ? 10 : null,
+          beginAtZero: chartIsHorizontal ? false : true,
+
           ticks: {
             stepSize: chartIsHorizontal ? 0.5 : null,
             font: {
               size: fontSize,
               family: "'Lato', sans-serif",
             },
-            beginAtZero: chartIsHorizontal ? false : null,
           },
         },
       },
@@ -124,7 +126,6 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
         },
       },
     };
-
     return chartOptions;
   };
 
