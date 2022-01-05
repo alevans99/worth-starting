@@ -36,6 +36,8 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
   // const dataSetIdKey = episodesInfo.showName;
   const [chartOrientation, setChartOrientation] = useState("vertical");
   const [chartType, setChartType] = useState("bar");
+  const [dynamicAxis, setDynamicAxis] = useState(true);
+
   const fontSize =
     (window.innerWidth / 100) * 1.5 > 10 ? (window.innerWidth / 100) * 1.5 : 10;
   const chartButtons = [
@@ -66,37 +68,81 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
     }
   };
 
+  const handleAxisButtonClick = () => {
+    setDynamicAxis((previousValue) => {
+      return !previousValue;
+    });
+    const newAxisSettings = createAxisSettings();
+
+    if (chartOrientation === "horizontal") {
+      chartRef.current.scales.x.max = newAxisSettings.xMax;
+      chartRef.current.scales.x.beginAtZero = newAxisSettings.xBeginAtZero;
+    } else {
+      chartRef.current.scales.y.max = newAxisSettings.yMax;
+      chartRef.current.scales.y.beginAtZero = newAxisSettings.yBeginAtZero;
+    }
+  };
+
+  const createAxisSettings = () => {
+    const axisSettings = {};
+    const fontSize =
+      (window.innerWidth / 100) * 1.5 > 10
+        ? (window.innerWidth / 100) * 1.5
+        : 10;
+    axisSettings.fontSize = fontSize;
+    axisSettings.fontFamily = "'Lato', sans-serif";
+
+    if (chartOrientation === "vertical") {
+      axisSettings.yMax = dynamicAxis ? null : 10;
+      axisSettings.yBeginAtZero = dynamicAxis ? false : true;
+      axisSettings.xMax = null;
+      axisSettings.xBeginAtZero = true;
+      axisSettings.indexAxis = "x";
+      axisSettings.yStep = 0.5;
+      axisSettings.xStep = null;
+    } else {
+      axisSettings.yMax = null;
+      axisSettings.yBeginAtZero = true;
+      axisSettings.xMax = dynamicAxis ? null : 10;
+      axisSettings.xBeginAtZero = dynamicAxis ? false : true;
+      axisSettings.indexAxis = "y";
+      axisSettings.yStep = null;
+      axisSettings.xStep = 0.5;
+    }
+    return axisSettings;
+  };
+
   const createChartOptions = () => {
     const chartIsHorizontal = chartOrientation === "horizontal";
+
+    const axisSettings = createAxisSettings();
 
     const chartOptions = {
       responsive: true,
       maintainAspectRatio: false,
-      indexAxis: chartIsHorizontal ? "y" : "x",
+      indexAxis: axisSettings.indexAxis,
 
       scales: {
         y: {
-          max: !chartIsHorizontal ? 10 : null,
-          beginAtZero: !chartIsHorizontal ? false : true,
-
-          // min: 0,
+          max: axisSettings.yMax,
+          beginAtZero: axisSettings.yBeginAtZero,
           ticks: {
-            stepSize: !chartIsHorizontal ? 0.5 : null,
+            stepSize: axisSettings.yStep,
             font: {
-              size: fontSize,
-              family: "'Lato', sans-serif",
+              size: axisSettings.fontSize,
+              family: axisSettings.fontFamily,
             },
           },
         },
         x: {
-          max: chartIsHorizontal ? 10 : null,
-          beginAtZero: chartIsHorizontal ? false : true,
+          max: axisSettings.xMax,
+          beginAtZero: axisSettings.xBeginAtZero,
 
           ticks: {
-            stepSize: chartIsHorizontal ? 0.5 : null,
+            stepSize: axisSettings.xStep,
             font: {
-              size: fontSize,
-              family: "'Lato', sans-serif",
+              size: axisSettings.fontSize,
+              family: axisSettings.fontFamily,
             },
           },
         },
@@ -105,23 +151,23 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
         legend: {
           labels: {
             font: {
-              size: fontSize,
-              family: "'Lato', sans-serif",
+              size: axisSettings.fontSize,
+              family: axisSettings.fontFamily,
             },
           },
         },
         tooltip: {
           titleFont: {
-            size: fontSize,
-            family: "'Lato', sans-serif",
+            size: axisSettings.fontSize,
+            family: axisSettings.fontFamily,
           },
           bodyFont: {
-            size: fontSize,
-            family: "'Lato', sans-serif",
+            size: axisSettings.fontSize,
+            family: axisSettings.fontFamily,
           },
           footerFont: {
-            size: fontSize,
-            family: "'Lato', sans-serif",
+            size: axisSettings.fontSize,
+            family: axisSettings.fontFamily,
           },
         },
       },
@@ -172,7 +218,22 @@ function ChartContainer({ episodesInfo, setModalData, setShowModal }) {
           );
         })}
       </div>
+      <div className="axis-switch-container">
+        <label className="switch">
+          <input
+            type="checkbox"
+            defaultChecked={true}
+            onClick={() => {
+              handleAxisButtonClick();
+            }}
+          />
 
+          <span className="slider round"></span>
+        </label>
+        <p className="axis-switch-label">
+          {dynamicAxis ? "Dynamic " : "Fixed"} Axis
+        </p>
+      </div>
       <div
         className={`${
           chartOrientation === "horizontal"
