@@ -1,5 +1,7 @@
-# Worth Starting?
 
+
+
+<img src="src/assets/worth-starting-preview.jpg" style="width: 400px; border-radius: 4px;"></img><br><br>
 Tired of commiting to a new TV series, only to find out that the later episodes don't live up to the hype? Save your time by checking the overall quality of episodes in clear graphs.
 
 ## Project Overview
